@@ -1010,6 +1010,10 @@ eightrtsjszc2
 `
 
 func main() {
+	fmt.Println("Part 1, result is", part1(input))
+}
+
+func part1(input string) string {
 	lines := strings.Split(input, "\n")
 	total := 0
 	for _, line := range lines {
@@ -1040,5 +1044,5 @@ func main() {
 		total += fnn
 	}
 
-	fmt.Println(total)
+	return fmt.Sprintf("%d", total)
 }
