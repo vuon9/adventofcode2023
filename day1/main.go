@@ -49,36 +49,30 @@ func part2(input string) string {
 		fn, ln := 0, 0
 		for i, j := 0, len(line)-1; i < len(line); i, j = i+1, j-1 {
 			if fn == 0 {
-				for str, num := range strToNum {
-					if len(line) >= i+len(str) {
-						qw := line[i : i+len(str)]
-						if str == qw {
+				if charToNum[string(line[i])] != 0 {
+					fn, _ = charToNum[string(line[i])]
+				} else {
+					for str, num := range strToNum {
+						if strings.HasPrefix(line[i:], str) {
 							fn = num
 							i += len(str)
 							break
 						}
 					}
 				}
-
-				if fn == 0 {
-					fn, _ = charToNum[string(line[i])]
-				}
 			}
 
 			if ln == 0 {
-				for str, num := range strToNum {
-					if j-len(str) >= 0 {
-						qw := line[j-len(str)+1 : j+1]
-						if str == qw {
+				if charToNum[string(line[j])] != 0 {
+					ln = charToNum[string(line[j])]
+				} else {
+					for str, num := range strToNum {
+						if j-len(str) >= 0 && str == line[j-len(str)+1:j+1] {
 							ln = num
 							j -= len(str)
 							break
 						}
 					}
-				}
-
-				if ln == 0 {
-					ln = charToNum[string(line[j])]
 				}
 			}
 		}
@@ -94,29 +88,19 @@ func part1(input string) string {
 	lines := strings.Split(input, "\n")
 	total := 0
 	for _, line := range lines {
-		if line == "" {
-			continue
-		}
-
-		fn, ln := "", ""
+		fn, ln := 0, 0
 
 		for i, j := 0, len(line)-1; i < len(line); i, j = i+1, j-1 {
-			if fn == "" {
-				ni, err := strconv.Atoi(string(line[i]))
-				if err == nil {
-					fn = fmt.Sprintf("%d", ni)
-				}
+			if fn == 0 {
+				fn = charToNum[string(line[i])]
 			}
 
-			if ln == "" {
-				nj, err := strconv.Atoi(string(line[j]))
-				if err == nil {
-					ln = fmt.Sprintf("%d", nj)
-				}
+			if ln == 0 {
+				ln = charToNum[string(line[j])]
 			}
 		}
 
-		fnn, _ := strconv.Atoi(fmt.Sprintf("%s%s", fn, ln))
+		fnn, _ := strconv.Atoi(fmt.Sprintf("%d%d", fn, ln))
 		total += fnn
 	}
 
