@@ -28,7 +28,7 @@ func main() {
 	fmt.Println("Part 2, result is: ", part2(input))
 }
 
-func part1(input string, exp expectation) string {
+func part1(input string, exp expectation) int {
 	total := 0
 
 	for _, line := range strings.Split(input, "\n") {
@@ -69,10 +69,10 @@ func part1(input string, exp expectation) string {
 		}
 	}
 
-	return fmt.Sprintf("%d", total)
+	return total
 }
 
-func part2(input string) string {
+func part2(input string) int {
 	total := 0
 
 	for _, line := range strings.Split(input, "\n") {
@@ -108,5 +108,5 @@ func part2(input string) string {
 		total += mRed * mGreen * mBlue
 	}
 
-	return fmt.Sprintf("%d", total)
+	return total
 }

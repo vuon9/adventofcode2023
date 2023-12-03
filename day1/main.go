@@ -41,7 +41,7 @@ func main() {
 	fmt.Println("Part 2, result is: ", part2(string(input)))
 }
 
-func part2(input string) string {
+func part2(input string) int {
 	lines := strings.Split(input, "\n")
 
 	total := 0
@@ -81,10 +81,10 @@ func part2(input string) string {
 		total += fnn
 	}
 
-	return fmt.Sprintf("%d", total)
+	return total
 }
 
-func part1(input string) string {
+func part1(input string) int {
 	lines := strings.Split(input, "\n")
 	total := 0
 	for _, line := range lines {
@@ -104,5 +104,5 @@ func part1(input string) string {
 		total += fnn
 	}
 
-	return fmt.Sprintf("%d", total)
+	return total
 }
