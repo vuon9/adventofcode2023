@@ -20,7 +20,7 @@ func part1(input string) int {
 	total := 0
 
 	for _, rawCard := range strings.Split(input, "\n") {
-		cardName := ""
+		cardNumber := 0
 		winNumbers := make(map[int]struct{})
 		myCardNumbers := make([]int, 0)
 		currentNumber := ""
@@ -30,7 +30,8 @@ func part1(input string) int {
 
 		for i := 0; i < len(rawCard); i++ {
 			if rawCard[i] == ':' {
-				cardName = rawCard[:i]
+				noSpaceRawCardName := strings.Replace(rawCard[:i], " ", "", -1)
+				cardNumber, _ = strconv.Atoi(strings.Split(noSpaceRawCardName, "Card")[1])
 				winNumbersStart = i + 2
 			}
 
@@ -82,7 +83,13 @@ func part1(input string) int {
 
 		total += cardTotal
 
-		fmt.Println(cardName, ":\n--", winNumbers, "\n--", myCardNumbers, wonCardNumbers, "=>", cardTotal)
+		fmt.Println(
+			cardNumber, ":",
+			// "\n--", winNumbers,
+			// "\n--", myCardNumbers,
+			// "\n--", wonCardNumbers,
+			"=>", cardTotal,
+		)
 	}
 
 	return total
